@@ -1,4 +1,2 @@
 print("hello world")
-# dfasdfasd
-# sadfdaf
-def add(a,b):
+# 这个是注释
