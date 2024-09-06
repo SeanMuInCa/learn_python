@@ -14,3 +14,11 @@ month = 9
 day = 5
 
 print(year, month, day,"today")
+print(year,month,day,'\n')
+print('next line')
+print()
+print('another line','\n')
+print('in another year' + str(year))  #这个有意思的拼接
+print('in another year', year)  #和上面的不一样,逗号自带空格效果
+
+
