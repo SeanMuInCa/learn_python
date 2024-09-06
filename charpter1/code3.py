@@ -14,3 +14,19 @@ elif n1 > 1:
     print('n1 > 1')
 else:
     print('n1 <= 1')
+
+match n1:
+    case 1:
+        print('n1 = 1')
+    case 2:
+        print('n1 = 2')
+    case _:
+        print('n1 != 1 and n1 != 2')
+
+print('done')
+
+def isLeapYear(year):
+    if year % 400 == 0 or year % 4 == 0 and year % 100 != 0:
+        return True
+    return False
+print(isLeapYear(2024))
