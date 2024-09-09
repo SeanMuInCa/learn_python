@@ -44,7 +44,3 @@ for i in range(n):
         print('%d * %d = %d' % (j+1,i+1,(j+1)*(i+1)), end=' ')
     print()
 
-m = 9
-while m > 0:
-    print(m)
-    m -= 1
