@@ -53,7 +53,7 @@ data = {
     'Score': [85, 90, 95]
 }
 df = pd.DataFrame(data)
-
+print(pd)
 # 查看数据
 print(df)
 #
