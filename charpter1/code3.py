@@ -44,3 +44,26 @@ for i in range(n):
         print('%d * %d = %d' % (j+1,i+1,(j+1)*(i+1)), end=' ')
     print()
 
+import pandas as pd
+
+# 创建一个 DataFrame
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+    'Score': [85, 90, 95]
+}
+df = pd.DataFrame(data)
+
+# 查看数据
+print(df)
+#
+# # 选择某一列
+print(df['Name'])
+print(df['Age'])
+#
+# # 筛选数据（选择年龄大于30的人）
+# filtered_df = df[df['Age'] > 30]
+# print(filtered_df)
+#
+# # 统计每列的平均值
+# print(df.mean())
