@@ -33,3 +33,22 @@ print('*' * 30)
 print(list(range(10)))
 print(list(range(1, 10)))
 print(list(range(1, 10, 2)))
+r1 = range(1,5)
+print(r1) # range object is iterable but can't see what is inside
+for i in r1:
+    print(i)
+list3 = list(range(1, 10))
+print(list3)
+list3[0] = 100
+print(list3)
+list3.append(10)
+print(list3)
+
+str1 = 'hello world'
+str2 = '''hello-2024-
+nihao'''
+
+print(str2.split('-'))
+print(str2.removeprefix('\n'),'removed')
+print(str2)
+print(str2.split('-'))
