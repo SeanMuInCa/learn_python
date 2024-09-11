@@ -14,7 +14,7 @@ for i in list2:
 
 for i, j in enumerate(list2):
     print(i, j)
-
+# tuple is an unchangeable list
 info_tuple = ('hello', 1, 2, 3, 'hello')
 print(info_tuple)
 print(info_tuple.count('hello'))
@@ -27,4 +27,9 @@ for i in info_tuple:
 
 for i, j in enumerate(info_tuple):
     print(i, j)
+print(info_tuple.count('hello'))
 
+print('*' * 30)
+print(list(range(10)))
+print(list(range(1, 10)))
+print(list(range(1, 10, 2)))
