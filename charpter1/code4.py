@@ -21,3 +21,9 @@ print(info_tuple.count('hello'))
 print(info_tuple[1])
 # info_tuple[1] = 10 #not allowed to change
 print(info_tuple[1])
+
+for i in info_tuple:
+    print(i)
+
+for i, j in enumerate(info_tuple):
+    print(i, j)
