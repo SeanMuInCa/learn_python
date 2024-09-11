@@ -27,3 +27,4 @@ for i in info_tuple:
 
 for i, j in enumerate(info_tuple):
     print(i, j)
+
