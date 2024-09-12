@@ -59,3 +59,6 @@ print(str2, modifiedStr2)
 dic1 = {'a':1,'b':2}  #map
 print(dic1.values())
 print(dic1.keys())
+print(dic1.get('a'))
+dic2 = dic1.copy()
+print(dic2 == dic1)
