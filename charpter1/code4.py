@@ -53,4 +53,5 @@ print(str2.removeprefix('\n'),'removed')
 print(str2)
 print(str2.split('-'))
 
-
+modifiedStr2 = str2.replace('nihao', 'nihao2')
+print(str2, modifiedStr2)
