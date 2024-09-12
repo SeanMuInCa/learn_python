@@ -55,3 +55,7 @@ print(str2.split('-'))
 
 modifiedStr2 = str2.replace('nihao', 'nihao2')
 print(str2, modifiedStr2)
+
+dic1 = {'a':1,'b':2}  #map
+print(dic1.values())
+print(dic1.keys())
