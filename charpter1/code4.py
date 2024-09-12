@@ -46,9 +46,11 @@ print(list3)
 
 str1 = 'hello world'
 str2 = '''hello-2024-
-nihao'''
+nihao abc'''
 
 print(str2.split('-'))
 print(str2.removeprefix('\n'),'removed')
 print(str2)
 print(str2.split('-'))
+
+
