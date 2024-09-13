@@ -11,3 +11,4 @@ s3 = set(d1) #只取了keys
 print(s3)
 
 print('nothing?',s2.difference(s3))
+print('nothing1?',s3.difference(s2))
