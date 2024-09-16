@@ -12,3 +12,6 @@ print(s3)
 
 print('nothing?',s2.difference(s3))
 print('nothing1?',s3.difference(s2))
+
+a = input('input: ')
+print(type(int(a)))
