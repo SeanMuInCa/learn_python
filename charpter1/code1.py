@@ -1,4 +1,9 @@
+import random
+x = "hello"
 
+print(x.replace("hello", "world"))
+
+print(random.randint(1,100))
 
 print("hello world")
 # 这个是注释
@@ -25,9 +30,9 @@ print('in another year', year)  #和上面的不一样,逗号自带空格效果
 print('today is %d, month %02d, %02d day %s' % (year, month, day, isinstance(year, str)))
 
 
-content = input("input something : ")
-print()
-print('the content is', content, end=' ')
-print("and it's instanceof str?", isinstance(content, str))
-print("and it's instanceof number?", isinstance(float(content), int), content)
+# content = input("input something : ")
+# print()
+# print('the content is', content, end=' ')
+# print("and it's instanceof str?", isinstance(content, str))
+# print("and it's instanceof number?", isinstance(float(content), int), content)
 
