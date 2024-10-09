@@ -75,4 +75,5 @@ for i in range(row):
         if i % 2 != 0 and j % 2 == 0:
             print(sampleArray[i][j])
 
-print(sampleArray[1:5:2, 0:2:4])
+print(sampleArray[1:5:2, 0:3:2])
+
