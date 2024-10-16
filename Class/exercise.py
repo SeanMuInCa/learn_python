@@ -53,8 +53,9 @@ data = {
     'Age': [24, 27, 22, 32, 29],
     'City': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix']
 }
+print('-' * 100)
 dataFrame = DataFrame(data)
-print(dataFrame.head(1))
+print(dataFrame.iloc[0])
 print(dataFrame['Age'])
 print(dataFrame['Age'][3])
 print(dataFrame.iloc[0:3])
