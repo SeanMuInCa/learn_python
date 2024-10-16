@@ -34,3 +34,11 @@ DF_obj2 = DataFrame(np.random.randint(1,11,size=64).reshape((8,8)),
                     index=['row 1', 'row 2', 'row 3', 'row 4','row 5','row 6','row 7','row 8'],
                    columns=['col 1','col 2','col 3','col 4','col 5','col 6', 'col 7','col 8'])
 print(DF_obj2)
+print('-' * 30)
+print(DF_obj2[DF_obj2 > 7]) #????
+print('-' * 30)
+for i in range(8):
+    for j in range(8):
+        if DF_obj2.iloc[i,j] > 7:
+            DF_obj2.iloc[i,j] = 10
+print(DF_obj2)
