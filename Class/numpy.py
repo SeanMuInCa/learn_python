@@ -72,12 +72,12 @@ sampleArray[0,1] = 4.5 # cast to int by force
 print(sampleArray)
 # Exercise 2: Following is the given numpy array return array of odd rows and even columns
 
-# row = sampleArray.shape[0]
-# col = sampleArray.shape[1]
-# for i in range(row):
-#     for j in range(col):
-#         if i % 2 != 0 and j % 2 == 0:
-#             print(sampleArray[i][j])
-#
-# print(sampleArray[1:5:2, 0:3:2])
+row = sampleArray.shape[0]
+col = sampleArray.shape[1]
+for i in range(row):
+    for j in range(col):
+        if i % 2 != 0 and j % 2 == 0:
+            print(sampleArray[i][j])
+
+print(sampleArray[1:5:2, 0:3:2])
 
