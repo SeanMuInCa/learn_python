@@ -34,3 +34,18 @@ print(f5)
 print('-'*100)
 f6=obj.dropna(axis=1) # drop the whole column if there is any missing value
 print(f6)
+print('-'*100)
+import kagglehub
+
+# Download latest version
+path = kagglehub.dataset_download("gunjanpathak/melb-data")
+
+print("Path to dataset files:", path)
+
+newFile = pd.read_csv(path+'\melb_data.csv')
+print(newFile.info())
+d1 = newFile.ffill()
+print(d1.info())
+d2 = d1.bfill()
+print(d2.info())
+print(d2.isnull().sum())
