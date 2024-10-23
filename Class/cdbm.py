@@ -14,3 +14,23 @@ print(obj.isnull())
 
 filled_obj=obj.fillna(0) # not going to change obj
 print(filled_obj)
+
+f2 = obj.fillna({0:0.1, 5:1.2})
+print(f2)
+print('-'*100)
+f3=obj.ffill() #from top to bottom
+print(f3)
+print('-'*100)
+f4=obj.bfill() #from bottom to top
+print(f4)
+print(obj.info()) # check basic information of the obj
+print('-'*100)
+print(obj.isnull().sum()) # by column
+
+print('-'*100)
+f5=obj.dropna() # if there is any missing value, drop the whole row
+print(f5)
+
+print('-'*100)
+f6=obj.dropna(axis=1) # drop the whole column if there is any missing value
+print(f6)
