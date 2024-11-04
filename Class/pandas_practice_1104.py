@@ -17,4 +17,10 @@ row_0 = tags.iloc[0]
 
 print(row_0)
 print(row_0.index)
-print(row_0['movieId'])
+print(row_0['userId'])
+print('tag' in row_0)
+print(row_0.name)
+row_0 = row_0.rename('darshan sucks')
+print(row_0.name)
+print('-' * 100)
+print(tags.describe())
