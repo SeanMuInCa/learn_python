@@ -44,7 +44,7 @@ ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
 salsByGenre = gameSalesCleaned.groupby('Genre')['Global_Sales'].sum()
 # 12 colors
 # ax.bar(genres, salsByGenre,color=['skyblue', 'yellowgreen', 'lightpink', '#f40', '#f90', 'lightblue', 'lightcoral', 'lightgreen', 'lightyellow', 'lightgray', 'lightseagreen', 'yellow'],label=genres)
-ax.hist(salsByGenre, bins=10)
+ax.hist(salsByGenre, bins=12)
 ax.set_xticklabels([])
 plt.xlabel('Genre')
 plt.ylabel('Global Sales (in millions)')
