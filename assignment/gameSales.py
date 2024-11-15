@@ -1,3 +1,5 @@
+from cProfile import label
+
 import pandas as pd
 import numpy as np
 
@@ -35,24 +37,35 @@ print(f'The sum of Japan Sales is: {SumJapanSales} Millions')
 print('-' * 100)
 import matplotlib.pyplot as plt
 
-# calculate total sales based on region
-total_na_sales = gameSalesCleaned['NA_Sales'].sum()
-total_eu_sales = gameSalesCleaned['EU_Sales'].sum()
-total_jp_sales = gameSalesCleaned['JP_Sales'].sum()
-total_other_sales = gameSalesCleaned['Other_Sales'].sum()
+genres = gameSalesCleaned['Genre'].unique()  # Get unique genres
 
+fig = plt.figure()
+ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+salsByGenre = gameSalesCleaned.groupby('Genre')['Global_Sales'].sum()
+# 12 colors
+# ax.bar(genres, salsByGenre,color=['skyblue', 'yellowgreen', 'lightpink', '#f40', '#f90', 'lightblue', 'lightcoral', 'lightgreen', 'lightyellow', 'lightgray', 'lightseagreen', 'yellow'],label=genres)
+ax.hist(salsByGenre, bins=10)
+ax.set_xticklabels([])
+plt.xlabel('Genre')
+plt.ylabel('Global Sales (in millions)')
+plt.title('Global Sales by Genre')
+plt.legend()
+# # Create a histogram for each genre
+# for genre in genres:
+#     # Filter data for the current genre
+#     genre_data = gameSalesCleaned[gameSalesCleaned['Genre'] == genre]
+#
+#     # Plot histogram for NA_Sales
+#     plt.hist(genre_data['NA_Sales'], bins=20, label=genre)
+#
+# # Adding labels and title
+# plt.title('NA Sales Distribution by Genre')
+# plt.xlabel('NA Sales (in millions)')
+# plt.ylabel('Frequency')
+# plt.legend()
 
-regions = ['North America', 'Europe', 'Japan', 'Other']
-total_sales = [total_na_sales, total_eu_sales, total_jp_sales, total_other_sales]
-
-
-plt.figure(figsize=(8,6))
-plt.bar(regions, total_sales, color=['skyblue', 'yellowgreen', 'lightpink', '#f40'])
-
-
-plt.title('Total Sales by Region')
-plt.xlabel('Region')
-plt.ylabel('Total Sales (in millions)')
-
+# Show the plot
 plt.show()
+
+
 
