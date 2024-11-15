@@ -33,3 +33,26 @@ print('-' * 100)
 SumJapanSales = gameSalesCleaned['JP_Sales'].sum()
 print(f'The sum of Japan Sales is: {SumJapanSales} Millions')
 print('-' * 100)
+import matplotlib.pyplot as plt
+
+# calculate total sales based on region
+total_na_sales = gameSalesCleaned['NA_Sales'].sum()
+total_eu_sales = gameSalesCleaned['EU_Sales'].sum()
+total_jp_sales = gameSalesCleaned['JP_Sales'].sum()
+total_other_sales = gameSalesCleaned['Other_Sales'].sum()
+
+
+regions = ['North America', 'Europe', 'Japan', 'Other']
+total_sales = [total_na_sales, total_eu_sales, total_jp_sales, total_other_sales]
+
+
+plt.figure(figsize=(8,6))
+plt.bar(regions, total_sales, color=['skyblue', 'yellowgreen', 'lightpink', '#f40'])
+
+
+plt.title('Total Sales by Region')
+plt.xlabel('Region')
+plt.ylabel('Total Sales (in millions)')
+
+plt.show()
+
