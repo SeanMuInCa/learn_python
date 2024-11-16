@@ -6,7 +6,7 @@ from re import search
 import pandas as pd
 from googleapiclient.discovery import build
 
-API_KEY = 'AIzaSyCWJzSunMJBynlH7J1gPBYycRUqqiAGCQ0'
+API_KEY = 'AIzaSyABXWVbt2Ybc7l89W9r77oFliPfIjz_bJU'
 
 youtube = build('youtube', 'v3', developerKey=API_KEY)
 
@@ -14,41 +14,46 @@ youtube = build('youtube', 'v3', developerKey=API_KEY)
 search_keyword = 'program language'
 search_response = youtube.search().list(q=search_keyword, part='id,snippet', maxResults=2).execute()
 
+search_results = search_response['items']
+while 'nextPageToken' in search_response:
+    next_page_token = search_response['nextPageToken']
 
-test = []
-for i in search_response['items']:
-    test.append(i['id']['videoId'])
-test1 = []
-for id in test:
+    # 使用nextPageToken获取下一页数据
+    search_response = youtube.search().list(
+        q=search_keyword,
+        part='id,snippet',
+        maxResults=50,
+        pageToken=next_page_token  # 使用nextPageToken请求下一批数据
+    ).execute()
+
+    # 将新获取的结果添加到列表
+    search_results += search_response['items']
+videoIds = []
+for i in search_results:
+    if i['id']['kind'] == 'youtube#video':
+        videoIds.append(i['id']['videoId'])
+
+videos = []
+for id in videoIds:
     res = youtube.videos().list(part="snippet,contentDetails,statistics" ,id=id).execute()
     for item in res['items']:
-        test1.append(item)
-print(test1)
-# search_results = search_response['items']
-# while 'nextPageToken' in search_response:
-#     next_page_token = search_response['nextPageToken']
-#
-#     # 使用nextPageToken获取下一页数据
-#     search_response = youtube.search().list(
-#         q=search_keyword,
-#         part='id,snippet',
-#         maxResults=50,
-#         pageToken=next_page_token  # 使用nextPageToken请求下一批数据
-#     ).execute()
-#
-#     # 将新获取的结果添加到列表
-#     search_results += search_response['items']
-# videos = []
-# for search_result in search_results:
-#     if search_result['id']['kind'] == 'youtube#video':
-#         video = {
-#             'id': search_result['id']['videoId'],
-#             'title': search_result['snippet']['title'],
-#             'description': search_result['snippet']['description'],
-#             'publishedAt': search_result['snippet']['publishedAt'],
-#             'channelId': search_result['snippet']['channelId'],
-#             'channelTitle': search_result['snippet']['channelTitle'],
-#         }
-#         videos.append(video)
-# df = pd.DataFrame(videos)
-# df.to_csv('dataFromYoutube.csv', index=False)
+        if item['kind'] == 'youtube#video':
+            video = {
+            'id': item.get('id', None),
+            'title': item['snippet'].get('title', None),
+            'description': item['snippet'].get('description', None),
+            'publishedAt': item['snippet'].get('publishedAt', None),
+            'channelId': item['snippet'].get('channelId', None),
+            'channelTitle': item['snippet'].get('channelTitle', None),
+            'tags': item['snippet'].get('tags', []),
+            'categoryId': item['snippet'].get('categoryId', None),
+            'defaultLanguage': item['snippet'].get('defaultLanguage', None),
+            'duration': item['contentDetails'].get('duration', None),
+            'viewCount': item['statistics'].get('viewCount', None),
+            'likeCount': item['statistics'].get('likeCount', None),
+            'favoriteCount': item['statistics'].get('favoriteCount', None),
+            'commentCount': item['statistics'].get('commentCount', None)
+            }
+            videos.append(video)
+df = pd.DataFrame(videos)
+df.to_csv('dataFromYoutube.csv', index=False)
