@@ -1,8 +1,3 @@
-import os
-from distutils.log import fatal
-from operator import index
-from re import search
-
 import pandas as pd
 from googleapiclient.discovery import build
 
@@ -17,16 +12,12 @@ search_response = youtube.search().list(q=search_keyword, part='id,snippet', max
 search_results = search_response['items']
 while 'nextPageToken' in search_response:
     next_page_token = search_response['nextPageToken']
-
-    # 使用nextPageToken获取下一页数据
     search_response = youtube.search().list(
         q=search_keyword,
         part='id,snippet',
         maxResults=50,
-        pageToken=next_page_token  # 使用nextPageToken请求下一批数据
+        pageToken=next_page_token
     ).execute()
-
-    # 将新获取的结果添加到列表
     search_results += search_response['items']
 videoIds = []
 for i in search_results:
