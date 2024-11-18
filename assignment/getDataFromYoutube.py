@@ -6,7 +6,7 @@ API_KEY = 'AIzaSyABXWVbt2Ybc7l89W9r77oFliPfIjz_bJU'
 youtube = build('youtube', 'v3', developerKey=API_KEY)
 
 
-search_keyword = 'program language'
+search_keyword = 'china'
 search_response = youtube.search().list(q=search_keyword, part='id,snippet', maxResults=2).execute()
 
 search_results = search_response['items']
@@ -47,4 +47,4 @@ for id in videoIds:
             }
             videos.append(video)
 df = pd.DataFrame(videos)
-df.to_csv('dataFromYoutube.csv', index=False)
+df.to_csv(f'dataFromYoutube_{search_keyword}.csv', index=False)
