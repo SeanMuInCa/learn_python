@@ -1,3 +1,4 @@
+import googleapiclient
 import pandas as pd
 from googleapiclient.discovery import build
 
@@ -48,18 +49,23 @@ for videoId in videoIds:
             videos.append(video)
 
 for video in videos:
-    if 'commentCount' in video and int(video['commentCount']) >= 5:
-        res = youtube.commentThreads().list(
-            part='snippet,replies',
-            videoId=video['id'],
-            maxResults=5,
-            textFormat='plainText'
-        ).execute()
+    comment_count = video.get('commentCount')
+    if comment_count and comment_count.isdigit() and int(comment_count) >= 5:
+        try:
+            res = youtube.commentThreads().list(
+                part='snippet,replies',
+                videoId=video['id'],
+                maxResults=5,
+                textFormat='plainText'
+            ).execute()
 
-        for index, item in enumerate(res['items']): # can't directly unpack two or more iterables
-            if 'comments' not in video:
+            video['comments'] = [item['snippet']['topLevelComment']['snippet']['textDisplay'] for item in res['items']]
+        except googleapiclient.errors.HttpError as e:
+            if e.resp.status == 403:
+                print(f"Comments are disabled for video ID {video['id']}")
                 video['comments'] = []
-            video['comments'].append(item['snippet']['topLevelComment']['snippet']['textDisplay'])
+            else:
+                raise
 
 df = pd.DataFrame(videos)
 df.to_csv(f'dataFromYoutube_{search_keyword}.csv', index=False)
