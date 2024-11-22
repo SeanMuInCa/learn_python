@@ -6,8 +6,8 @@ API_KEY = 'AIzaSyABXWVbt2Ybc7l89W9r77oFliPfIjz_bJU'
 youtube = build('youtube', 'v3', developerKey=API_KEY)
 
 
-search_keyword = 'china'
-search_response = youtube.search().list(q=search_keyword, part='id,snippet', maxResults=2).execute()
+search_keyword = 'program language'
+search_response = youtube.search().list(q=search_keyword, part='id,snippet', maxResults=50).execute()
 
 search_results = search_response['items']
 while 'nextPageToken' in search_response:
@@ -25,8 +25,8 @@ for i in search_results:
         videoIds.append(i['id']['videoId'])
 
 videos = []
-for id in videoIds:
-    res = youtube.videos().list(part="snippet,contentDetails,statistics" ,id=id).execute()
+for videoId in videoIds:
+    res = youtube.videos().list(part="snippet,contentDetails,statistics" ,id=videoId).execute()
     for item in res['items']:
         if item['kind'] == 'youtube#video':
             video = {
@@ -46,5 +46,20 @@ for id in videoIds:
             'commentCount': item['statistics'].get('commentCount', None)
             }
             videos.append(video)
+
+for video in videos:
+    if 'commentCount' in video and int(video['commentCount']) >= 5:
+        res = youtube.commentThreads().list(
+            part='snippet,replies',
+            videoId=video['id'],
+            maxResults=5,
+            textFormat='plainText'
+        ).execute()
+
+        for index, item in enumerate(res['items']): # can't directly unpack two or more iterables
+            if 'comments' not in video:
+                video['comments'] = []
+            video['comments'].append(item['snippet']['topLevelComment']['snippet']['textDisplay'])
+
 df = pd.DataFrame(videos)
 df.to_csv(f'dataFromYoutube_{search_keyword}.csv', index=False)
